@@ -1,4 +1,18 @@
 package net.teslaa.musicmachine;
 
-public class DownloadThread {
+import android.os.Looper;
+import android.provider.MediaStore;
+import android.util.Log;
+
+public class DownloadThread extends Thread {
+    private static final String TAG = DownloadThread.class.getSimpleName();
+
+    public DownloadHandler mHandler;
+    @Override
+    public void run() {
+        Looper.prepare();
+        mHandler = new DownloadHandler();
+        Looper.loop();
+    }
+
 }
