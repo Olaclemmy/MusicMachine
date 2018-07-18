@@ -1,5 +1,6 @@
 package net.teslaa.musicmachine;
 
+import android.content.Intent;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    public static final String KEY_SONG = "song";
     private Button mDownloadButton;
     @Override
     protected void
@@ -31,9 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
                 // Send Messages or Runnable to Handler for processing
                 for (String song : Playlist.songs){
-                    Message message = Message.obtain();
+/*                  Message message = Message.obtain();
                     message.obj = song;
-                    thread.mHandler.sendMessage(message);
+                    thread.mHandler.sendMessage(message);*/
+
+                    Intent intent = new Intent(MainActivity.this, DownloadService.class);
+                    intent.putExtra(KEY_SONG, song);
+                    startService(intent);
                 }
 
             }
